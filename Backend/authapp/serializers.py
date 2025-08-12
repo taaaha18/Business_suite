@@ -1,14 +1,13 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password, check_password
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import Admin, Assistant, Manager, Developer, Designer
+from .models import Admin, Developer, Client
+from django.utils import timezone
 
 ROLE_MODEL_MAP = {
     'admin': Admin,
-    'assistant': Assistant,
-    'manager': Manager,
     'developer': Developer,
-    'designer': Designer,
+    'client': Client,
 }
 
 def get_tokens_for_user(user, role):
@@ -87,3 +86,110 @@ class LoginSerializer(serializers.Serializer):
             },
             'tokens': tokens
         }
+
+
+# -------- Client Serializer --------
+class ClientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Client
+        fields = '__all__'
+        read_only_fields = ('id', 'created_at', 'updated_at')
+
+    def validate_email(self, value):
+        """
+        Check if email already exists
+        """
+        # Get the current instance if updating
+        instance = getattr(self, 'instance', None)
+        
+        # Check for existing email
+        queryset = Client.objects.filter(email=value)
+        
+        # If updating, exclude the current instance
+        if instance:
+            queryset = queryset.exclude(pk=instance.pk)
+        
+        if queryset.exists():
+            raise serializers.ValidationError("A client with this email already exists.")
+        
+        return value
+
+    def validate_client_id(self, value):
+        """
+        Check if client_id already exists (only for creation)
+        """
+        # Only validate uniqueness during creation
+        if not self.instance and Client.objects.filter(client_id=value).exists():
+            raise serializers.ValidationError("A client with this ID already exists.")
+        return value
+
+    def validate_hourly_rate(self, value):
+        """
+        Validate hourly rate is positive
+        """
+        if value < 0:
+            raise serializers.ValidationError("Hourly rate cannot be negative.")
+        if value > 10000:  # Add reasonable upper limit
+            raise serializers.ValidationError("Hourly rate seems too high. Please verify.")
+        return value
+
+    def validate_project_deadline(self, value):
+        """
+        Validate project deadline is not in the past (only for new projects)
+        """
+        if not self.instance and value < timezone.now().date():
+            raise serializers.ValidationError("Project deadline cannot be in the past.")
+        return value
+
+    def validate_client_name(self, value):
+        """
+        Validate client name
+        """
+        if len(value.strip()) < 2:
+            raise serializers.ValidationError("Client name must be at least 2 characters long.")
+        return value.strip()
+
+    def validate_company_name(self, value):
+        """
+        Validate company name
+        """
+        if len(value.strip()) < 2:
+            raise serializers.ValidationError("Company name must be at least 2 characters long.")
+        return value.strip()
+
+    def validate_project_name(self, value):
+        """
+        Validate project name
+        """
+        if len(value.strip()) < 3:
+            raise serializers.ValidationError("Project name must be at least 3 characters long.")
+        return value.strip()
+
+    def to_representation(self, instance):
+        """
+        Customize the output representation
+        """
+        representation = super().to_representation(instance)
+        
+        # Add computed fields if needed
+        if hasattr(instance, 'created_at'):
+            representation['created_at'] = instance.created_at.isoformat() if instance.created_at else None
+        if hasattr(instance, 'updated_at'):
+            representation['updated_at'] = instance.updated_at.isoformat() if instance.updated_at else None
+            
+        return representation
+
+    def update(self, instance, validated_data):
+        """
+        Update and return an existing Client instance, given the validated data.
+        """
+        # Update all fields
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        
+        # Set updated timestamp if your model has it
+        if hasattr(instance, 'updated_at'):
+            instance.updated_at = timezone.now()
+            
+        instance.save()
+        return instance
