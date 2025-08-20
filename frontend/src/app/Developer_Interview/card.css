@@ -1,0 +1,399 @@
+/* InterviewScheduleCards.css */
+
+.interview-cards-container {
+  width: 100%;
+  padding: 1.5rem;
+  background-color: #f8fafc;
+  min-height: 400px;
+}
+
+/* Header */
+.cards-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.cards-header h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.interview-count {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: #64748b;
+}
+
+.loading-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid #e2e8f0;
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+
+.error-message {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid #fecaca;
+  font-weight: 500;
+}
+
+/* No Interviews State */
+.no-interviews-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  color: #64748b;
+  text-align: center;
+}
+
+.no-interviews-icon {
+  color: #cbd5e1;
+  margin-bottom: 1rem;
+}
+
+.no-interviews-container h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0.5rem 0;
+  color: #475569;
+}
+
+.no-interviews-container p {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+/* Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Individual Card */
+/* Force blue border for all cards */
+.interview-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-left: 4px solid #3b82f6; /* BLUE border */
+}
+
+.interview-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Remove the old status-based overrides */
+.interview-card.upcoming,
+.interview-card.today,
+.interview-card.past {
+  border-left-color: #3b82f6; /* Force blue regardless of status */
+}
+
+
+.interview-card.today {
+  border-left-color: #f59e0b;
+}
+
+.interview-card.past {
+  border-left-color: #6b7280;
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem 1.5rem 1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.company-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 1rem;
+}
+
+.company-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.company-icon {
+  color: #3b82f6;
+  flex-shrink: 0;
+}
+
+.company-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.company-url-btn {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.company-url-btn:hover {
+  color: #3b82f6;
+  background-color: #e2e8f0;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-badge.upcoming {
+  background-color:#4285f4;
+  color: white;
+   
+}
+
+.status-badge.today {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.past {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+/* Card Body */
+.card-body {
+  padding: 1rem 1.5rem;
+}
+
+.role-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: #f1f5f9;
+  border-radius: 0.5rem;
+}
+
+.role-icon {
+  color: #475569;
+  flex-shrink: 0;
+}
+
+.role-title {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 1rem;
+}
+
+.datetime-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.datetime-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.datetime-icon {
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.datetime-item span {
+  font-size: 0.875rem;
+  color: #475569;
+  font-weight: 500;
+}
+
+.bd-info-section {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1rem;
+}
+
+.bd-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.bd-icon {
+  color: #7c3aed;
+  flex-shrink: 0;
+}
+
+.bd-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bd-details {
+  padding-left: 1.5rem;
+}
+
+.bd-name {
+  display: block;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+}
+
+.bd-contact {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/* Card Footer */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.interview-id {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #3b82f6;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.created-date {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .interview-cards-container {
+    padding: 1rem;
+  }
+  
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .cards-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .company-info {
+    width: 100%;
+    margin-right: 0;
+  }
+  
+  .card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .interview-cards-container {
+    padding: 0.75rem;
+  }
+  
+  .interview-card {
+    border-radius: 0.75rem;
+  }
+  
+  .card-header,
+  .card-body,
+  .card-footer {
+    padding: 1rem;
+  }
+  
+  .company-name {
+    font-size: 1.125rem;
+  }
+  
+  .datetime-section {
+    gap: 0.5rem;
+  }
+}

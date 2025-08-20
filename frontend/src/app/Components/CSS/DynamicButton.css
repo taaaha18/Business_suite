@@ -1,0 +1,285 @@
+/* Dynamic Button Component Styles */
+
+/* Base Button Styles */
+.dynamic-button {
+  @apply relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-in-out cursor-pointer border focus:outline-none focus:ring-2 focus:ring-offset-2;
+  @apply active:scale-95 hover:scale-105;
+}
+
+/* Button Content */
+.dynamic-button-content {
+  @apply flex items-center justify-center gap-2 transition-opacity duration-200;
+}
+
+.dynamic-button-content-loading {
+  @apply opacity-0;
+}
+
+.dynamic-button-text {
+  @apply whitespace-nowrap;
+}
+
+.dynamic-button-icon {
+  @apply flex items-center justify-center;
+}
+
+.dynamic-button-icon-left {
+  @apply mr-1;
+}
+
+.dynamic-button-icon-right {
+  @apply ml-1;
+}
+
+/* Loading Spinner */
+.dynamic-button-spinner {
+  @apply absolute inset-0 flex items-center justify-center;
+}
+
+.dynamic-button-spinner-circle {
+  @apply w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin;
+}
+
+/* Width Variants */
+.dynamic-button-width-full {
+  @apply w-full;
+}
+
+.dynamic-button-width-fit {
+  @apply w-fit;
+}
+
+/* Height Variants */
+.dynamic-button-height-sm {
+  @apply h-8 min-h-[2rem];
+}
+
+.dynamic-button-height-md {
+  @apply h-10 min-h-[2.5rem];
+}
+
+.dynamic-button-height-lg {
+  @apply h-12 min-h-[3rem];
+}
+
+.dynamic-button-height-xl {
+  @apply h-14 min-h-[3.5rem];
+}
+
+/* Size Variants (affects padding and font size) */
+.dynamic-button-size-xs {
+  @apply px-2 py-1 text-xs;
+}
+
+.dynamic-button-size-sm {
+  @apply px-3 py-1.5 text-sm;
+}
+
+.dynamic-button-size-md {
+  @apply px-4 py-2 text-base;
+}
+
+.dynamic-button-size-lg {
+  @apply px-6 py-3 text-lg;
+}
+
+.dynamic-button-size-xl {
+  @apply px-8 py-4 text-xl;
+}
+
+/* Rounded Variants */
+.dynamic-button-rounded-none {
+  @apply rounded-none;
+}
+
+.dynamic-button-rounded-sm {
+  @apply rounded-sm;
+}
+
+.dynamic-button-rounded-md {
+  @apply rounded-md;
+}
+
+.dynamic-button-rounded-lg {
+  @apply rounded-lg;
+}
+
+.dynamic-button-rounded-full {
+  @apply rounded-full;
+}
+
+/* Shadow Variants */
+.dynamic-button-shadow-none {
+  @apply shadow-none;
+}
+
+.dynamic-button-shadow-sm {
+  @apply shadow-sm hover:shadow-md;
+}
+
+.dynamic-button-shadow-md {
+  @apply shadow-md hover:shadow-lg;
+}
+
+.dynamic-button-shadow-lg {
+  @apply shadow-lg hover:shadow-xl;
+}
+
+.dynamic-button-shadow-xl {
+  @apply shadow-xl hover:shadow-2xl;
+}
+
+/* Color Variants - Solid */
+.dynamic-button-solid.dynamic-button-primary {
+  @apply bg-blue-600 text-white border-blue-600 hover:bg-blue-700 focus:ring-blue-500;
+}
+
+.dynamic-button-solid.dynamic-button-secondary {
+  @apply bg-gray-600 text-white border-gray-600 hover:bg-gray-700 focus:ring-gray-500;
+}
+
+.dynamic-button-solid.dynamic-button-success {
+  @apply bg-green-600 text-white border-green-600 hover:bg-green-700 focus:ring-green-500;
+}
+
+.dynamic-button-solid.dynamic-button-danger {
+  @apply bg-red-600 text-white border-red-600 hover:bg-red-700 focus:ring-red-500;
+}
+
+.dynamic-button-solid.dynamic-button-warning {
+  @apply bg-yellow-500 text-white border-yellow-500 hover:bg-yellow-600 focus:ring-yellow-400;
+}
+
+.dynamic-button-solid.dynamic-button-info {
+  @apply bg-cyan-600 text-white border-cyan-600 hover:bg-cyan-700 focus:ring-cyan-500;
+}
+
+.dynamic-button-solid.dynamic-button-dark {
+  @apply bg-gray-800 text-white border-gray-800 hover:bg-gray-900 focus:ring-gray-700;
+}
+
+.dynamic-button-solid.dynamic-button-light {
+  @apply bg-gray-100 text-gray-800 border-gray-100 hover:bg-gray-200 focus:ring-gray-300;
+}
+
+/* Color Variants - Outline */
+.dynamic-button-outline.dynamic-button-primary {
+  @apply bg-transparent text-blue-600 border-blue-600 hover:bg-blue-50 focus:ring-blue-500;
+}
+
+.dynamic-button-outline.dynamic-button-secondary {
+  @apply bg-transparent text-gray-600 border-gray-600 hover:bg-gray-50 focus:ring-gray-500;
+}
+
+.dynamic-button-outline.dynamic-button-success {
+  @apply bg-transparent text-green-600 border-green-600 hover:bg-green-50 focus:ring-green-500;
+}
+
+.dynamic-button-outline.dynamic-button-danger {
+  @apply bg-transparent text-red-600 border-red-600 hover:bg-red-50 focus:ring-red-500;
+}
+
+.dynamic-button-outline.dynamic-button-warning {
+  @apply bg-transparent text-yellow-600 border-yellow-500 hover:bg-yellow-50 focus:ring-yellow-400;
+}
+
+.dynamic-button-outline.dynamic-button-info {
+  @apply bg-transparent text-cyan-600 border-cyan-600 hover:bg-cyan-50 focus:ring-cyan-500;
+}
+
+.dynamic-button-outline.dynamic-button-dark {
+  @apply bg-transparent text-gray-800 border-gray-800 hover:bg-gray-50 focus:ring-gray-700;
+}
+
+.dynamic-button-outline.dynamic-button-light {
+  @apply bg-transparent text-gray-600 border-gray-300 hover:bg-gray-50 focus:ring-gray-300;
+}
+
+/* Color Variants - Ghost */
+.dynamic-button-ghost.dynamic-button-primary {
+  @apply bg-transparent text-blue-600 border-transparent hover:bg-blue-50 focus:ring-blue-500;
+}
+
+.dynamic-button-ghost.dynamic-button-secondary {
+  @apply bg-transparent text-gray-600 border-transparent hover:bg-gray-50 focus:ring-gray-500;
+}
+
+.dynamic-button-ghost.dynamic-button-success {
+  @apply bg-transparent text-green-600 border-transparent hover:bg-green-50 focus:ring-green-500;
+}
+
+.dynamic-button-ghost.dynamic-button-danger {
+  @apply bg-transparent text-red-600 border-transparent hover:bg-red-50 focus:ring-red-500;
+}
+
+.dynamic-button-ghost.dynamic-button-warning {
+  @apply bg-transparent text-yellow-600 border-transparent hover:bg-yellow-50 focus:ring-yellow-400;
+}
+
+.dynamic-button-ghost.dynamic-button-info {
+  @apply bg-transparent text-cyan-600 border-transparent hover:bg-cyan-50 focus:ring-cyan-500;
+}
+
+.dynamic-button-ghost.dynamic-button-dark {
+  @apply bg-transparent text-gray-800 border-transparent hover:bg-gray-50 focus:ring-gray-700;
+}
+
+.dynamic-button-ghost.dynamic-button-light {
+  @apply bg-transparent text-gray-600 border-transparent hover:bg-gray-50 focus:ring-gray-300;
+}
+
+/* Gradient Variants */
+.dynamic-button-gradient.dynamic-button-primary {
+  @apply bg-gradient-to-r from-blue-500 to-blue-700 text-white border-transparent hover:from-blue-600 hover:to-blue-800 focus:ring-blue-500;
+}
+
+.dynamic-button-gradient.dynamic-button-secondary {
+  @apply bg-gradient-to-r from-gray-500 to-gray-700 text-white border-transparent hover:from-gray-600 hover:to-gray-800 focus:ring-gray-500;
+}
+
+.dynamic-button-gradient.dynamic-button-success {
+  @apply bg-gradient-to-r from-green-500 to-green-700 text-white border-transparent hover:from-green-600 hover:to-green-800 focus:ring-green-500;
+}
+
+.dynamic-button-gradient.dynamic-button-danger {
+  @apply bg-gradient-to-r from-red-500 to-red-700 text-white border-transparent hover:from-red-600 hover:to-red-800 focus:ring-red-500;
+}
+
+.dynamic-button-gradient.dynamic-button-warning {
+  @apply bg-gradient-to-r from-yellow-400 to-yellow-600 text-white border-transparent hover:from-yellow-500 hover:to-yellow-700 focus:ring-yellow-400;
+}
+
+.dynamic-button-gradient.dynamic-button-info {
+  @apply bg-gradient-to-r from-cyan-500 to-cyan-700 text-white border-transparent hover:from-cyan-600 hover:to-cyan-800 focus:ring-cyan-500;
+}
+
+/* Disabled State */
+.dynamic-button-disabled {
+  @apply opacity-50 cursor-not-allowed;
+  @apply hover:scale-100 active:scale-100;
+}
+
+.dynamic-button-disabled:hover {
+  @apply shadow-md;
+}
+
+/* Loading State */
+.dynamic-button-loading {
+  @apply cursor-wait;
+}
+
+/* Focus States */
+.dynamic-button:focus {
+  @apply ring-2 ring-offset-2;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .dynamic-button-size-lg {
+    @apply px-4 py-2 text-base;
+  }
+  
+  .dynamic-button-size-xl {
+    @apply px-6 py-3 text-lg;
+  }
+}

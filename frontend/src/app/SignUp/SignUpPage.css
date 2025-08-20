@@ -1,0 +1,407 @@
+/* SignUpPage.css */
+
+
+/* Main Container */
+.signup-container {
+  min-height: 100vh;
+/*  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: whitesmoke;
+}
+
+/* Header Section */
+.signup-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.logo-icon {
+  width: 4rem;
+  height: 4rem;
+  background: #4285f4;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0.5rem 0 0.25rem 0;
+  letter-spacing: -0.025em;
+}
+
+.app-subtitle {
+  font-size: 1.125rem;
+  color: #718096;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Form Container */
+.form-container {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 28rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.025em;
+}
+
+.form-subtitle {
+  font-size: 1rem;
+  color: #718096;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Form Content */
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Input Groups */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  color: #2d3748;
+  background: white;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #4285f4;
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.form-input::placeholder {
+  color: #a0aec0;
+  font-size: 0.875rem;
+}
+
+.form-input.input-error {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+}
+
+/* Password Input Container */
+.password-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input {
+  padding-right: 3rem !important;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.875rem;
+  background: none;
+  border: none;
+  color: #718096;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: color 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle:hover {
+  color: #4a5568;
+}
+
+.password-toggle:focus {
+  outline: none;
+  color: #4285f4;
+}
+
+/* Error Messages */
+.error-message {
+  font-size: 0.75rem;
+  color: #e53e3e;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* Dropdown Customization */
+.role-dropdown {
+  width: 100%;
+}
+
+.dropdown-button-custom {
+  width: 100% !important;
+  padding: 0.875rem 1rem !important;
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 0.75rem !important;
+  font-size: 1rem !important;
+  color: #2d3748 !important;
+  background: white !important;
+  transition: all 0.2s ease-in-out !important;
+  height: auto !important;
+  min-height: 3.25rem;
+}
+
+.dropdown-button-custom:focus {
+  border-color: #4285f4 !important;
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1) !important;
+}
+
+.dropdown-menu-custom {
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Create Account Button */
+.create-account-btn {
+  width: 100%;
+  background: #4285f4;
+  color: white;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-top: 0.5rem;
+  letter-spacing: 0.025em;
+}
+
+.create-account-btn:hover {
+  background: #3367d6;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px -5px rgba(66, 133, 244, 0.3);
+}
+
+.create-account-btn:active {
+  transform: translateY(0);
+}
+
+.create-account-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
+}
+
+/* Sign In Section */
+.signin-section {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.signin-text {
+  font-size: 0.875rem;
+  color: #718096;
+  margin: 0;
+}
+
+.signin-link {
+  color: #4285f4;
+  text-decoration: none;
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+  transition: color 0.2s ease-in-out;
+}
+
+.signin-link:hover {
+  color: #3367d6;
+  text-decoration: underline;
+}
+
+.signin-link:focus {
+  outline: none;
+  color: #3367d6;
+  text-decoration: underline;
+}
+
+/* Demo Section */
+.demo-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.demo-title {
+  font-size: 0.875rem;
+  color: #718096;
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+}
+
+.demo-account {
+  font-size: 0.75rem;
+  color: #a0aec0;
+  margin: 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  background: #f7fafc;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid #e2e8f0;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .signup-container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .form-container {
+    padding: 2rem 1.5rem;
+    margin: 0 0.5rem;
+  }
+  
+  .app-title {
+    font-size: 2rem;
+  }
+  
+  .form-title {
+    font-size: 1.5rem;
+  }
+  
+  .form-subtitle {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-container {
+    padding: 1.5rem 1rem;
+  }
+  
+  .app-title {
+    font-size: 1.75rem;
+  }
+  
+  .logo-icon {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.25rem;
+  }
+}
+
+/* Animation for smooth appearance */
+.form-container {
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.signup-header {
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Focus and accessibility improvements */
+.form-input:focus,
+.dropdown-button-custom:focus,
+.create-account-btn:focus,
+.signin-link:focus,
+.password-toggle:focus {
+  outline: 2px solid #4285f4;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .form-input {
+    border-width: 2px;
+  }
+  
+  .create-account-btn {
+    border: 2px solid #4285f4;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .form-container,
+  .signup-header,
+  .create-account-btn,
+  .signin-link,
+  .password-toggle,
+  .form-input {
+    animation: none;
+    transition: none;
+  }
+  
+  .create-account-btn:hover {
+    transform: none;
+  }
+}

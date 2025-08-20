@@ -1,0 +1,113 @@
+/* ClientCard.css - Tailwind-based styles */
+
+.client-card {
+  @apply bg-white rounded-xl shadow-lg border border-gray-100 p-6 max-w-sm mx-auto transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+}
+
+.client-card-header {
+  @apply flex items-start justify-between mb-6;
+}
+
+.client-avatar {
+  @apply w-14 h-14 rounded-full flex items-center justify-center text-white font-bold shadow-md;
+}
+
+.client-initials {
+  @apply text-lg font-semibold;
+}
+
+.client-info {
+  @apply flex-1;
+}
+
+.client-name {
+  @apply text-xl font-bold text-gray-900 mb-1;
+}
+
+.client-company {
+  @apply text-sm text-gray-600 flex items-center gap-1;
+}
+
+.company-icon {
+  @apply text-xs opacity-70;
+}
+
+.overdue-badge {
+  @apply bg-red-500 text-white text-xs font-medium px-3 py-1 rounded-full shadow-sm;
+}
+
+.client-details {
+  @apply space-y-3 mb-6;
+}
+
+.detail-item {
+  @apply flex items-center gap-3 text-sm;
+}
+
+.detail-icon {
+  @apply text-base opacity-70;
+}
+
+.detail-text {
+  @apply text-gray-700 font-medium;
+}
+
+.project-section {
+  @apply mb-6 pb-4 border-b border-gray-100;
+}
+
+.project-title {
+  @apply text-sm font-semibold text-gray-900 mb-2;
+}
+
+.project-name {
+  @apply text-gray-800 font-medium mb-2;
+}
+
+.client-id {
+  @apply text-xs text-gray-500 font-mono;
+}
+
+.card-actions {
+  @apply flex items-center gap-3;
+}
+
+.edit-button {
+  @apply flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium text-sm transition-colors duration-200 flex-1 justify-center;
+}
+
+.delete-button {
+  @apply flex items-center justify-center w-12 h-10 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium text-sm transition-colors duration-200 shadow-sm;
+}
+
+.button-icon {
+  @apply text-sm;
+}
+
+/* Hover effects */
+.client-card:hover .client-avatar {
+  @apply scale-105;
+}
+
+.client-card:hover .overdue-badge {
+  @apply bg-red-600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .client-card {
+    @apply max-w-full mx-2;
+  }
+  
+  .client-name {
+    @apply text-lg;
+  }
+  
+  .client-avatar {
+    @apply w-12 h-12;
+  }
+  
+  .client-initials {
+    @apply text-base;
+  }
+}

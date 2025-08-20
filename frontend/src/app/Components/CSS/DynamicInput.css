@@ -1,0 +1,146 @@
+/* Dynamic Input Component Styles */
+.dynamic-input-container {
+  @apply relative w-full mb-4;
+}
+
+.dynamic-input-wrapper {
+  @apply relative flex items-center;
+}
+
+.dynamic-input-field {
+  @apply relative w-full;
+}
+
+/* Base Input Styles */
+.dynamic-input {
+  @apply w-full px-4 py-3 text-gray-900 placeholder-transparent border border-gray-300 rounded-lg bg-white transition-all duration-200 ease-in-out;
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+}
+
+/* Label Styles */
+.dynamic-input-label {
+  @apply absolute left-4 text-gray-500 transition-all duration-200 ease-in-out pointer-events-none;
+  @apply top-1/2 -translate-y-1/2;
+}
+
+/* Focused or Has Value States */
+.dynamic-input-focused .dynamic-input-label,
+.dynamic-input-has-value .dynamic-input-label {
+  @apply top-0 left-3 -translate-y-1/2 text-xs px-1 bg-white text-blue-600;
+}
+
+/* Required Asterisk */
+.dynamic-input-required {
+  @apply text-red-500 ml-1;
+}
+
+/* Icon Styles */
+.dynamic-input-icon {
+  @apply absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 z-10;
+}
+
+.dynamic-input-container:has(.dynamic-input-icon) .dynamic-input {
+  @apply pl-10;
+}
+
+.dynamic-input-container:has(.dynamic-input-icon) .dynamic-input-label {
+  @apply left-10;
+}
+
+.dynamic-input-focused:has(.dynamic-input-icon) .dynamic-input-label,
+.dynamic-input-has-value:has(.dynamic-input-icon) .dynamic-input-label {
+  @apply left-7;
+}
+
+/* Size Variants */
+.dynamic-input-sm .dynamic-input {
+  @apply px-3 py-2 text-sm;
+}
+
+.dynamic-input-sm .dynamic-input-label {
+  @apply text-sm;
+}
+
+.dynamic-input-lg .dynamic-input {
+  @apply px-5 py-4 text-lg;
+}
+
+.dynamic-input-lg .dynamic-input-label {
+  @apply text-base;
+}
+
+/* Style Variants */
+.dynamic-input-outlined .dynamic-input {
+  @apply border-2 border-gray-300 bg-transparent;
+}
+
+.dynamic-input-outlined.dynamic-input-focused .dynamic-input {
+  @apply border-blue-500;
+}
+
+.dynamic-input-filled .dynamic-input {
+  @apply bg-gray-50 border-0 border-b-2 border-gray-300 rounded-t-lg rounded-b-none;
+}
+
+.dynamic-input-filled.dynamic-input-focused .dynamic-input {
+  @apply bg-gray-100 border-blue-500;
+}
+
+/* Error States */
+.dynamic-input-error .dynamic-input {
+  @apply border-red-500 focus:ring-red-500;
+}
+
+.dynamic-input-error .dynamic-input-label {
+  @apply text-red-500;
+}
+
+.dynamic-input-error.dynamic-input-focused .dynamic-input-label,
+.dynamic-input-error.dynamic-input-has-value .dynamic-input-label {
+  @apply text-red-600;
+}
+
+/* Disabled State */
+.dynamic-input-disabled .dynamic-input {
+  @apply bg-gray-100 text-gray-400 cursor-not-allowed border-gray-200;
+}
+
+.dynamic-input-disabled .dynamic-input-label {
+  @apply text-gray-400;
+}
+
+.dynamic-input-disabled .dynamic-input-icon {
+  @apply text-gray-300;
+}
+
+/* Helper Text */
+.dynamic-input-helper {
+  @apply mt-1 px-1;
+}
+
+.dynamic-input-error-text {
+  @apply text-sm text-red-600;
+}
+
+.dynamic-input-helper-text {
+  @apply text-sm text-gray-500;
+}
+
+/* Focus Styles */
+.dynamic-input-focused .dynamic-input {
+  @apply shadow-lg transform scale-[1.02];
+}
+
+/* Hover Effects */
+.dynamic-input-container:not(.dynamic-input-disabled):hover .dynamic-input {
+  @apply border-gray-400;
+}
+
+.dynamic-input-outlined:not(.dynamic-input-disabled):hover .dynamic-input {
+  @apply border-blue-400;
+}
+
+/* Animation for label */
+.dynamic-input-label {
+  transform-origin: left center;
+}

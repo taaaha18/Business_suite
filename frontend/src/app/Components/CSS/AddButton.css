@@ -1,0 +1,156 @@
+/* AddClientButton.css - Tailwind-based styles */
+
+.add-client-button {
+  @apply relative inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 ease-in-out overflow-hidden cursor-pointer select-none focus:outline-none focus:ring-4;
+  transform: translateY(0);
+}
+
+/* Button Content */
+.add-client-button__content {
+  @apply relative z-10 flex items-center gap-2;
+}
+
+.add-client-button__icon {
+  @apply flex items-center justify-center transition-transform duration-200;
+}
+
+.add-client-button__text {
+  @apply whitespace-nowrap font-medium;
+}
+
+/* Size Variants */
+.add-client-button--small {
+  @apply px-3 py-2 text-sm;
+}
+
+.add-client-button--small .add-client-button__icon svg {
+  @apply w-4 h-4;
+}
+
+.add-client-button--medium {
+  @apply px-5 py-3 text-base;
+}
+
+.add-client-button--medium .add-client-button__icon svg {
+  @apply w-5 h-5;
+}
+
+.add-client-button--large {
+  @apply px-6 py-4 text-lg;
+}
+
+.add-client-button--large .add-client-button__icon svg {
+  @apply w-6 h-6;
+}
+
+/* Color Variants */
+.add-client-button--primary {
+  @apply bg-blue-600 text-white shadow-lg hover:bg-blue-700 focus:ring-blue-300 border-2 border-blue-600 hover:border-blue-700;
+}
+
+.add-client-button--secondary {
+  @apply bg-gray-600 text-white shadow-lg hover:bg-gray-700 focus:ring-gray-300 border-2 border-gray-600 hover:border-gray-700;
+}
+
+.add-client-button--outline {
+  @apply bg-transparent text-blue-600 border-2 border-blue-600 hover:bg-blue-50 focus:ring-blue-300 hover:text-blue-700 hover:border-blue-700;
+}
+
+/* States */
+.add-client-button:hover {
+  transform: translateY(-1px);
+  @apply shadow-xl;
+}
+
+.add-client-button:active,
+.add-client-button--pressed {
+  transform: translateY(0);
+  @apply shadow-md;
+}
+
+.add-client-button:hover .add-client-button__icon {
+  transform: scale(1.1) rotate(90deg);
+}
+
+.add-client-button--disabled {
+  @apply opacity-50 cursor-not-allowed pointer-events-none;
+  transform: translateY(0) !important;
+}
+
+.add-client-button--loading {
+  @apply cursor-wait;
+}
+
+/* Loading Spinner */
+.add-client-button__spinner {
+  @apply inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin;
+}
+
+/* Ripple Effect */
+.add-client-button__ripple {
+  @apply absolute inset-0 rounded-xl opacity-0 pointer-events-none;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+  transform: scale(0);
+  animation: ripple 0.6s ease-out;
+}
+
+.add-client-button:active .add-client-button__ripple {
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Pulse Animation for Attention */
+.add-client-button--primary {
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4), 0 4px 6px -2px rgba(59, 130, 246, 0.05);
+  }
+  50% {
+    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.6), 0 10px 15px -3px rgba(59, 130, 246, 0.1);
+  }
+}
+
+/* Hover animations */
+.add-client-button:hover {
+  animation: none;
+}
+
+/* Focus visible for accessibility */
+.add-client-button:focus-visible {
+  @apply ring-4 ring-opacity-50;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .add-client-button--large {
+    @apply px-5 py-3 text-base;
+  }
+  
+  .add-client-button--medium {
+    @apply px-4 py-2.5 text-sm;
+  }
+  
+  .add-client-button--small {
+    @apply px-3 py-2 text-xs;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .add-client-button--outline {
+    @apply hover:bg-blue-950 hover:bg-opacity-20;
+  }
+}

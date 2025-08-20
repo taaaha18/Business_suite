@@ -1,0 +1,345 @@
+.developer-card {
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.developer-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+}
+
+/* Header Section */
+.developer-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.developer-card-avatar-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.developer-card-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #f3f4f6;
+}
+
+.developer-card-avatar-placeholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+
+.developer-card-basic-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.developer-card-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+}
+
+.developer-card-experience {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Status Badge */
+.developer-card-status {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: 0.025em;
+}
+
+.status-active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Contact Information */
+.developer-card-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.developer-card-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.developer-card-contact-item svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.developer-card-contact-item span {
+  color: #374151;
+}
+
+/* Skills Section */
+.developer-card-skills {
+  margin-bottom: 24px;
+}
+
+.developer-card-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 12px 0;
+}
+
+.developer-card-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.developer-card-skill-tag {
+  background: #f3f4f6;
+  color: #374151;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.developer-card-skill-tag:hover {
+  background: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+/* Stats Section */
+.developer-card-stats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.developer-card-stat {
+  flex: 1;
+}
+
+.developer-card-stat-label {
+  display: block;
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+
+.developer-card-stat-value {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Action Buttons */
+.developer-card-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.developer-card-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.developer-card-btn:active {
+  transform: translateY(1px);
+}
+
+.developer-card-btn-secondary {
+  background: #f9fafb;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}
+
+.developer-card-btn-secondary:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.developer-card-btn-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+.developer-card-btn-primary:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .developer-card {
+    padding: 20px;
+    max-width: 100%;
+  }
+  
+  .developer-card-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  
+  .developer-card-avatar-section {
+    width: 100%;
+  }
+  
+  .developer-card-stats {
+    gap: 16px;
+  }
+  
+  .developer-card-actions {
+    flex-direction: column;
+  }
+  
+  .developer-card-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .developer-card {
+    padding: 16px;
+  }
+  
+  .developer-card-name {
+    font-size: 18px;
+  }
+  
+  .developer-card-avatar,
+  .developer-card-avatar-placeholder {
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
+  }
+  
+  .developer-card-skills-list {
+    gap: 6px;
+  }
+  
+  .developer-card-skill-tag {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+}
+
+.developer-card-office-id {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #3b82f6;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.developer-card-office-id svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Alternative badge styles for different status types */
+.developer-card-office-id.status-active {
+  background-color: #10b981;
+}
+
+.developer-card-office-id.status-pending {
+  background-color: #f59e0b;
+}
+
+.developer-card-office-id.status-inactive {
+  background-color: #6b7280;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .developer-card-office-id {
+    top: 8px;
+    right: 8px;
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+}
+
+/* Ensure the header doesn't overlap with the badge */
+.developer-card-header {
+  margin-top: 8px; /* Add some top margin to account for the badge */
+}
+
+/* Style for no data placeholders */
+.developer-card-no-data {
+  color: #9ca3af;
+  font-style: italic;
+  font-size: 14px;
+}

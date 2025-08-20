@@ -1,0 +1,56 @@
+/* Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light Theme Defaults */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-inter: 'Inter', sans-serif;
+  font-family: var(--font-inter);
+
+
+
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-mono: 'Menlo', 'Monaco', 'Courier New', monospace;
+}
+
+/* Dark Theme Overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #f5f5f5;
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+  }
+}
+
+/* Global Element Styling */
+body {
+  @apply bg-white text-neutral-900 font-sans antialiased;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Normalize headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  @apply text-gray-900 dark:text-white;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
