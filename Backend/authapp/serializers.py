@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password, check_password
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import Admin, Developer, Client, Developer_data, BD
+from .models import Admin, Developer, Client, Developer_data, BD,JobApplication,InterviewSchedule
 from django.utils import timezone
 import re
 
@@ -548,3 +548,249 @@ class DeveloperDataSerializer(serializers.ModelSerializer):
         instance.updated_at = timezone.now()
         instance.save()
         return instance
+
+    ####Job Title Validation######
+
+   # Add this JobApplicationSerializer to your existing serializers.py file
+# Add this import at the top: from .models import JobApplication
+
+class JobApplicationSerializer(serializers.ModelSerializer):
+    # Add read-only fields for better data representation
+    bd_name = serializers.CharField(source='bd_id.name', read_only=True)
+    skills_display = serializers.CharField(source='skills_list', read_only=True)
+    
+    class Meta:
+        model = JobApplication
+        fields = '__all__'
+        read_only_fields = ('job_id', 'created_at', 'updated_at', 'applied_date')
+
+    def validate_bd_id(self, value):
+        """
+        Validate that the BD exists
+        """
+        if not BD.objects.filter(BD_id=value.BD_id).exists():
+            raise serializers.ValidationError("Invalid BD ID. BD does not exist.")
+        return value
+
+    def validate_job_title(self, value):
+        """
+        Validate job title
+        """
+        if not value or len(value.strip()) < 2:
+            raise serializers.ValidationError("Job title must be at least 2 characters long.")
+        return value.strip()
+
+    def validate_company(self, value):
+        """
+        Validate company name
+        """
+        if not value or len(value.strip()) < 2:
+            raise serializers.ValidationError("Company name must be at least 2 characters long.")
+        return value.strip()
+
+    def validate_platform(self, value):
+        """
+        Validate platform
+        """
+        if not value:
+            raise serializers.ValidationError("Platform is required.")
+        
+        valid_platforms = [choice[0] for choice in JobApplication.PLATFORM_CHOICES]
+        if value not in valid_platforms:
+            raise serializers.ValidationError(f"Invalid platform. Must be one of: {', '.join(valid_platforms)}")
+        return value
+
+    def validate_job_url(self, value):
+        """
+        Validate job URL if provided
+        """
+        if value and not value.startswith(('http://', 'https://')):
+            raise serializers.ValidationError("Job URL must start with http:// or https://")
+        return value
+
+    def validate_skills(self, value):
+        """
+        Validate skills list
+        """
+        if not isinstance(value, list):
+            raise serializers.ValidationError("Skills must be a list.")
+        
+        # Remove empty strings and duplicates
+        cleaned_skills = list(set([skill.strip() for skill in value if skill and skill.strip()]))
+        return cleaned_skills
+
+    def validate_salary_range(self, value):
+        """
+        Validate salary range format
+        """
+        if value and len(value.strip()) < 3:
+            raise serializers.ValidationError("Please provide a valid salary range.")
+        return value.strip() if value else None
+
+    def validate_job_type(self, value):
+        """
+        Validate job type
+        """
+        if value:
+            valid_job_types = [choice[0] for choice in JobApplication.JOB_TYPE_CHOICES]
+            if value not in valid_job_types:
+                raise serializers.ValidationError(f"Invalid job type. Must be one of: {', '.join(valid_job_types)}")
+        return value
+
+    def validate_experience_level(self, value):
+        """
+        Validate experience level
+        """
+        if value:
+            valid_experience_levels = [choice[0] for choice in JobApplication.EXPERIENCE_LEVEL_CHOICES]
+            if value not in valid_experience_levels:
+                raise serializers.ValidationError(f"Invalid experience level. Must be one of: {', '.join(valid_experience_levels)}")
+        return value
+
+    def validate_application_status(self, value):
+        """
+        Validate application status
+        """
+        if value:
+            valid_statuses = [choice[0] for choice in JobApplication.APPLICATION_STATUS_CHOICES]
+            if value not in valid_statuses:
+                raise serializers.ValidationError(f"Invalid application status. Must be one of: {', '.join(valid_statuses)}")
+        return value
+
+    def to_representation(self, instance):
+        """
+        Customize the output representation
+        """
+        representation = super().to_representation(instance)
+        
+        # Add formatted timestamps
+        if instance.created_at:
+            representation['created_at'] = instance.created_at.isoformat()
+        if instance.updated_at:
+            representation['updated_at'] = instance.updated_at.isoformat()
+        if instance.applied_date:
+            representation['applied_date'] = instance.applied_date.isoformat()
+            
+        # Add BD information
+        representation['bd_info'] = {
+            'bd_id': instance.bd_id.BD_id,
+            'name': instance.bd_id.name,
+            'email': instance.bd_id.email
+        }
+        
+        return representation
+
+    def create(self, validated_data):
+        """
+        Create a new job application
+        """
+        try:
+            return super().create(validated_data)
+        except Exception as e:
+            raise serializers.ValidationError(f"Error creating job application: {str(e)}")
+
+    def update(self, instance, validated_data):
+        """
+        Update an existing job application
+        """
+        try:
+            # Update all fields
+            for attr, value in validated_data.items():
+                setattr(instance, attr, value)
+            
+            # Set updated timestamp
+            instance.updated_at = timezone.now()
+            instance.save()
+            return instance
+        except Exception as e:
+            raise serializers.ValidationError(f"Error updating job application: {str(e)}")
+
+
+# Optional: Create a simplified serializer for listing jobs
+class JobApplicationListSerializer(serializers.ModelSerializer):
+    bd_name = serializers.CharField(source='bd_id.name', read_only=True)
+    skills_display = serializers.CharField(source='skills_list', read_only=True)
+    
+    class Meta:
+        model = JobApplication
+        fields = [
+            'job_id', 'job_title', 'company', 'location', 'salary_range',
+            'job_type', 'experience_level', 'platform', 'job_url', 'skills',
+            'job_description', 'key_requirements', 'personal_notes', 
+            'application_status', 'bd_name', 'skills_display', 'applied_date', 
+            'created_at', 'updated_at'
+        ]
+        read_only_fields = ('job_id', 'created_at', 'updated_at', 'applied_date')
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        
+        # Add BD information
+        representation['bd_info'] = {
+            'bd_id': instance.bd_id.BD_id,
+            'name': instance.bd_id.name,
+            'email': instance.bd_id.email
+        }
+        
+        # Ensure skills is always an array
+        if isinstance(instance.skills, str):
+            representation['skills'] = [instance.skills] if instance.skills else []
+        elif isinstance(instance.skills, list):
+            representation['skills'] = instance.skills
+        else:
+            representation['skills'] = []
+            
+        # Format timestamps
+        if instance.created_at:
+            representation['created_at'] = instance.created_at.isoformat()
+        if instance.updated_at:
+            representation['updated_at'] = instance.updated_at.isoformat()
+        if instance.applied_date:
+            representation['applied_date'] = instance.applied_date.isoformat()
+            
+        return representation
+
+class InterviewScheduleSerializer(serializers.ModelSerializer):
+    # Read-only fields for displaying related data
+    bd_name = serializers.CharField(source='bd_id.name', read_only=True)
+    developer_name = serializers.CharField(source='dev_id.full_name', read_only=True)
+    
+    class Meta:
+        model = InterviewSchedule
+        fields = '__all__'
+        read_only_fields = ('interview_id', 'created_at', 'updated_at')
+    
+    def validate_company_name(self, value):
+        if len(value.strip()) < 2:
+            raise serializers.ValidationError("Company name must be at least 2 characters long.")
+        return value.strip()
+    
+    def validate_role(self, value):
+        if len(value.strip()) < 2:
+            raise serializers.ValidationError("Role must be at least 2 characters long.")
+        return value.strip()
+    
+    def validate_company_url(self, value):
+        if value and not value.startswith(('http://', 'https://')):
+            value = f'https://{value}'
+        return value
+    
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        
+        # Add BD information
+        representation['bd_info'] = {
+            'bd_id': instance.bd_id.BD_id,
+            'name': instance.bd_id.name,
+            'email': instance.bd_id.email
+        }
+        
+        # Add Developer information
+        representation['developer_info'] = {
+            'office_id': instance.dev_id.office_id,
+            'name': instance.dev_id.full_name,
+            'email': instance.dev_id.email,
+            'title': instance.dev_id.professionalTitle
+        }
+        
+        return representation

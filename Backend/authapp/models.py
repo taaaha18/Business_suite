@@ -139,3 +139,140 @@ class BD(models.Model):
     @property
     def full_name(self):
         return self.name
+
+
+# Add this JobApplication model to your existing models.py file
+
+class JobApplication(models.Model):
+    JOB_TYPE_CHOICES = [
+        ('Full-time', 'Full-time'),
+        ('Part-time', 'Part-time'),
+        ('Contract', 'Contract'),
+        ('Freelance', 'Freelance'),
+        ('Internship', 'Internship'),
+        ('Remote', 'Remote'),
+        ('Hybrid', 'Hybrid'),
+    ]
+    
+    EXPERIENCE_LEVEL_CHOICES = [
+        ('Entry Level', 'Entry Level'),
+        ('Junior (1-2 years)', 'Junior (1-2 years)'),
+        ('Mid-Level (3-5 years)', 'Mid-Level (3-5 years)'),
+        ('Senior (5+ years)', 'Senior (5+ years)'),
+        ('Lead/Principal', 'Lead/Principal'),
+        ('Executive', 'Executive'),
+    ]
+    
+    PLATFORM_CHOICES = [
+        ('LinkedIn', 'LinkedIn'),
+        ('Indeed', 'Indeed'),
+        ('Glassdoor', 'Glassdoor'),
+        ('AngelList', 'AngelList'),
+        ('Stack Overflow Jobs', 'Stack Overflow Jobs'),
+        ('GitHub Jobs', 'GitHub Jobs'),
+        ('Company Website', 'Company Website'),
+        ('Referral', 'Referral'),
+        ('Other', 'Other'),
+    ]
+    
+    APPLICATION_STATUS_CHOICES = [
+        ('Applied', 'Applied'),
+        ('Under Review', 'Under Review'),
+        ('Interview Scheduled', 'Interview Scheduled'),
+        ('Interview Completed', 'Interview Completed'),
+        ('Offer Received', 'Offer Received'),
+        ('Rejected', 'Rejected'),
+        ('Withdrawn', 'Withdrawn'),
+        ('Accepted', 'Accepted'),
+    ]
+
+    # Primary key
+    job_id = models.AutoField(primary_key=True)
+    
+    # Foreign key to BD table
+    bd_id = models.ForeignKey(BD, on_delete=models.CASCADE, to_field='BD_id', db_column='bd_id')
+    
+    # Basic Information
+    job_title = models.CharField(max_length=200)
+    company = models.CharField(max_length=200)
+    location = models.CharField(max_length=200, blank=True, null=True)
+    salary_range = models.CharField(max_length=100, blank=True, null=True)
+    job_type = models.CharField(max_length=50, choices=JOB_TYPE_CHOICES, blank=True, null=True)
+    experience_level = models.CharField(max_length=50, choices=EXPERIENCE_LEVEL_CHOICES, blank=True, null=True)
+    
+    # Source Information
+    platform = models.CharField(max_length=50, choices=PLATFORM_CHOICES)
+    job_url = models.URLField(blank=True, null=True)
+    
+    # Skills and Details
+    skills = models.JSONField(default=list, help_text="List of required skills")
+    job_description = models.TextField(blank=True, null=True)
+    key_requirements = models.TextField(blank=True, null=True)
+    personal_notes = models.TextField(blank=True, null=True)
+    
+    # Application Status
+    application_status = models.CharField(
+        max_length=50, 
+        choices=APPLICATION_STATUS_CHOICES, 
+        default='Applied'
+    )
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    applied_date = models.DateField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'jobs'
+        verbose_name = 'Job Application'
+        verbose_name_plural = 'Job Applications'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.job_title} at {self.company} - {self.bd_id.name}"
+
+    @property
+    def skills_list(self):
+        """Return skills as a comma-separated string for display"""
+        if isinstance(self.skills, list):
+            return ', '.join(self.skills)
+        return self.skills or ''        
+
+
+class InterviewSchedule(models.Model):
+    """
+    InterviewSchedule model to store interview assignments between developers and companies
+    """
+    
+    # Primary key - Auto incrementing integer
+    interview_id = models.AutoField(primary_key=True)
+    
+    # Foreign keys to existing tables
+    bd_id = models.ForeignKey(BD, on_delete=models.CASCADE, to_field='BD_id', db_column='bd_id')
+    dev_id = models.ForeignKey(Developer_data, on_delete=models.CASCADE, to_field='office_id', db_column='dev_id')
+    job_id = models.ForeignKey(JobApplication, on_delete=models.CASCADE, to_field='job_id', db_column='job_id')
+    
+    # Company information
+    company_name = models.CharField(max_length=200)
+    
+    # Job role/position
+    role = models.CharField(max_length=150)
+    
+    # Interview date and time
+    interview_date = models.DateField()
+    interview_time = models.TimeField()
+    
+    # Company URL - optional field
+    company_url = models.URLField(max_length=500, blank=True, null=True)
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'interview_schedules'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.company_name} - {self.role} ({self.interview_date})"
+
